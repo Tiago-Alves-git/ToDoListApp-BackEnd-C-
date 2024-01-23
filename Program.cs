@@ -15,6 +15,14 @@ builder.Services.AddScoped<ITasksRepository, TasksRepository>();
 
 var app = builder.Build();
 
+//enable CORS 
+app.UseCors(builder =>
+{
+    builder.AllowAnyOrigin();
+    builder.AllowAnyMethod();
+    builder.AllowAnyHeader();
+});
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
