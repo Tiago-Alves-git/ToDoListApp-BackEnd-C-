@@ -71,4 +71,27 @@ public class TasksRepository : ITasksRepository
     }
     return null!;
   }
+
+   public TaskDto DeleteTask(int id)
+        {
+            // Implementação básica: Procura a tarefa pelo ID e a remove.
+            var taskToDelete = _context.Tasks.FirstOrDefault(t => t.TaskId == id);
+
+            if (taskToDelete != null)
+            {
+                _context.Tasks.Remove(taskToDelete);
+                _context.SaveChanges();
+
+                var newResponse = new TaskDtoResponse
+                 {
+                  TaskId = taskToDelete.TaskId,
+                  Title = taskToDelete.Title,
+                  IsCompleted = taskToDelete.IsCompleted,
+                  Description = taskToDelete.Description
+                  };
+                  return newResponse;
+            }
+
+            return null; // Retorna null se a tarefa com o ID fornecido não foi encontrada.
+        }
 }

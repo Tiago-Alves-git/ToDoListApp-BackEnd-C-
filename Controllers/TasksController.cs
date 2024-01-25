@@ -63,4 +63,25 @@ public class TasksController : ControllerBase
       return BadRequest();
     }
   }
+
+  [HttpDelete("{id}")]
+        public IActionResult DeleteTask(int id)
+        {
+            try
+            {
+                var deletedTask = _repository.DeleteTask(id);
+                if (deletedTask != null)
+                {
+                    return Ok(deletedTask);
+                }
+                else
+                {
+                    return NotFound();
+                }
+            }
+            catch
+            {
+                return StatusCode(500, "Internal Error");
+            }
+        }
 }
