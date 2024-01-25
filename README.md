@@ -18,7 +18,7 @@ Este é um aplicativo de lista de tarefas (backend) desenvolvido em C# usando AS
    cd TodoListAppBack
    ```
 
-### 2. **Crie um arquivo `appsettings.json` na raiz do projeto com o seguinte conteúdo (substitua os valores conforme necessário):**
+### 2. **Edite o arquivo `appsettings.json` na raiz do projeto com o seguinte conteúdo (substitua os valores conforme necessário):**
 
    ```json
    {
@@ -71,4 +71,3 @@ Lembre-se de ajustar as variáveis de ambiente no arquivo `docker-compose.yml` c
 ## Observações
 
 Certifique-se de que as variáveis de ambiente e as configurações do banco de dados são adequadas para o seu ambiente ao clonar a aplicação.
-```
