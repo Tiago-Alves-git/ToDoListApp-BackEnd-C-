@@ -72,7 +72,7 @@ public class TasksRepository : ITasksRepository
     return null!;
   }
 
-   public TaskDto DeleteTask(int id)
+   public TaskDtoResponse DeleteTask(int id)
         {
             // Implementação básica: Procura a tarefa pelo ID e a remove.
             var taskToDelete = _context.Tasks.FirstOrDefault(t => t.TaskId == id);

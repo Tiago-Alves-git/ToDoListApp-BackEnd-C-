@@ -1,83 +1,74 @@
-# ToDoList App - Backend
+# TodoListAppBack
 
-This is the backend for a ToDoList App written in C#. It provides functionalities to manage tasks, including creating, editing, and deleting tasks.
+Este é um aplicativo de lista de tarefas (backend) desenvolvido em C# usando ASP.NET Core e Entity Framework Core, com suporte a Docker para o banco de dados.
 
-## Features
+## Pré-requisitos
 
-- **Create Task:** Add a new task to the ToDoList.
-- **Edit Task:** Modify the details of an existing task.
-- **Delete Task:** Remove a task from the ToDoList.
+- Docker
+- .NET 6 SDK
+- Uma ferramenta para fazer chamadas HTTP para a API (por exemplo, Postman ou ThunderClient)
+- (Opcional) Um cliente SQL para explorar o banco de dados (por exemplo, Azure Data Studio)
 
-## Technologies Used
+## Configuração
 
-- C# (Programming Language)
-- ASP.NET Core (Web Framework)
+### 1. **Clone o repositório:**
 
-## Getting Started
+   ```bash
+   git clone https://github.com/Tiago-Alves-git/ToDoListApp-BackEnd-C-
+   cd TodoListAppBack
+   ```
 
-### Prerequisites
+### 2. **Crie um arquivo `appsettings.json` na raiz do projeto com o seguinte conteúdo (substitua os valores conforme necessário):**
 
-- [.NET Core SDK](https://dotnet.microsoft.com/download) must be installed on your machine.
+   ```json
+   {
+     "ConnectionStrings": {
+       "DefaultConnection": "Server=localhost;Database=TodoListDb;User=sa;Password=TodoList1"
+     },
+     "Logging": {
+       "LogLevel": {
+         "Default": "Information",
+         "Microsoft.AspNetCore": "Warning"
+       }
+     },
+     "AllowedHosts": "*"
+   }
+   ```
 
-### Installation
+### 3. **Execute o seguinte comando para criar e iniciar os containers Docker para o SQL Server Edge:**
 
-1. Clone the repository:
+   ```bash
+   docker-compose up -d
+   ```
 
-    ```bash
-    git clone https://github.com/Tiago-Alves-git/ToDoListApp-BackEnd-C-
-    ```
+   Isso iniciará o banco de dados SQL Server Edge em um container Docker.
 
-2. Navigate to the project directory:
+### 4. **Abra o projeto no Visual Studio Code ou sua IDE preferida e execute a aplicação:**
 
-    ```bash
-    cd ToDoListApp-BackEnd-C-
-    ```
+   ```bash
+   dotnet run
+   ```
 
-3. Restore dependencies:
+5. **A aplicação estará disponível em `https://localhost:5001` (ou `http://localhost:5293`).**
 
-    ```bash
-    dotnet restore
-    ```
+## Endpoints da API
 
-4. Run the application:
+- **GET /api/Tasks**: Obter todas as tarefas.
+- **POST /api/Tasks**: Adicionar uma nova tarefa.
+- **PUT /api/Tasks**: Atualizar uma tarefa existente.
+- **DELETE /api/Tasks/{id}**: Excluir uma tarefa pelo ID.
 
-    ```bash
-    dotnet run
-    ```
+## Docker Compose
 
-    The application will be accessible at `http://localhost:5293`.
+O arquivo `docker-compose.yml` inclui um serviço para o SQL Server Edge. Ao usar Docker Compose, o banco de dados pode ser facilmente iniciado com um único comando:
 
-## API Endpoints
+```bash
+docker-compose up -d
+```
 
-- **Create Task:**
-  - Endpoint: `POST /api/tasks`
-  - Request Body:
-    ```json
-    {
-      "title": "Task Title",
-      "description": "Task Description"
-    }
-    ```
+Lembre-se de ajustar as variáveis de ambiente no arquivo `docker-compose.yml` conforme necessário.
 
-- **Edit Task:**
-  - Endpoint: `PUT /api/tasks/`
-  - Request Body:
-    ```json
-    {
-      "TaskId": 1,
-      "Title": "Updated Task Title",
-      "Description": "Updated Task Description",
-      "IsCompleted": true
-    }
-    ```
+## Observações
 
-- **Delete Task:**
-  - Endpoint: `DELETE /api/tasks/{taskId}`
-
-## Contributing
-
-If you would like to contribute to this project, please follow the [Contributing Guidelines](CONTRIBUTING.md).
-
-## License
-
-This project is licensed under the [MIT License](LICENSE).
+Certifique-se de que as variáveis de ambiente e as configurações do banco de dados são adequadas para o seu ambiente ao clonar a aplicação.
+```
